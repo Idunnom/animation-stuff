@@ -1,0 +1,64 @@
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+
+-- Define the decal ID (replace with the decal ID you want to use)
+local decalID = "http://www.roblox.com/asset/?id=12636175122"
+
+-- Function to add a decal to all sides of the torso
+local function addDecalToTorso()
+    local torso = character:FindFirstChild("UpperTorso") or character:FindFirstChild("Torso")
+
+    if torso then
+        -- Resize the torso to 1.5 on all axes
+        torso.Size = Vector3.new(3, 2, 2)
+
+        -- Create and apply the decal
+        local decal = Instance.new("Decal")
+        decal.Texture = decalID
+        decal.Parent = torso
+        decal.Face = Enum.NormalId.Front
+        -- Add decal to other sides of the torso
+        local sides = {Enum.NormalId.Back, Enum.NormalId.Left, Enum.NormalId.Right, Enum.NormalId.Top, Enum.NormalId.Bottom}
+        for _, side in pairs(sides) do
+            local sideDecal = decal:Clone()
+            sideDecal.Face = side
+            sideDecal.Parent = torso
+        end
+    else
+        warn("Torso not found!")
+    end
+end
+
+-- Function to remove decals from the head and make it disappear
+local function removeHeadAndFace()
+    local head = character:FindFirstChild("Head")
+    if head then
+        -- Remove all decals and face on the head
+        for _, child in pairs(head:GetChildren()) do
+            if child:IsA("Decal") or child.Name == "face" then
+                child:Destroy()
+            end
+        end
+        
+        -- Make the head completely transparent
+        head.Transparency = 1
+        head.CanCollide = false
+    else
+        warn("Head not found!")
+    end
+end
+
+-- Function to make other body parts transparent
+local function makeBodyPartsTransparent()
+    for _, part in pairs(character:GetChildren()) do
+        if part:IsA("BasePart") and part.Name ~= "UpperTorso" and part.Name ~= "LowerTorso" then
+            part.Transparency = 1
+            part.CanCollide = false
+        end
+    end
+end
+
+-- Run functions
+removeHeadAndFace()
+addDecalToTorso()
+makeBodyPartsTransparent()
