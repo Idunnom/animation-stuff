@@ -1,0 +1,24 @@
+getgenv().headhats = { ["meshid:417373422"] = CFrame.new(0, 0, 0),}
+getgenv().right = "meshid:12876378389"
+getgenv().left = "RectangleHead"
+getgenv().HATDROP = true
+getgenv().fullbody = false
+getgenv().options = {
+	dontfling = false,
+	righthandrotoffset = Vector3.new(0, 0, 0),
+	lefthandrotoffset = Vector3.new(0, 0, 0),
+	headscale = 3,
+	rightleg = "",
+	leftleg = "",
+	rightlegrotoffset = Vector3.new(0, 0, 0),
+	leftlegrotoffset = Vector3.new(0, 0, 0),
+	NetVelocity = Vector3.new(20,20,20), -- if your hands and head keep falling set these to higher numbers
+	controllerRotationOffset = Vector3.new(180,180,0),
+	HeadHatTransparency = 1,
+	leftToyBind = Enum.KeyCode.ButtonY,
+	rightToyBind = Enum.KeyCode.ButtonB,
+	leftToy = "meshid:4315410540", -- default is "" or nil
+	rightToy = "", -- default is "" or nil
+}
+getgenv().skyVRversion = '3.0.0'
+loadstring(game:HttpGet('https://raw.githubusercontent.com/presidentanvil/skyvr/main/SkyVR.lua'))();
