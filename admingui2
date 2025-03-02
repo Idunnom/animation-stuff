@@ -1,0 +1,94 @@
+-- Gui to Lua
+-- Version: 3.2
+
+-- Instances:
+
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local TextLabel = Instance.new("TextLabel")
+local TextButton = Instance.new("TextButton")
+local TextButton_2 = Instance.new("TextButton")
+local TextButton_3 = Instance.new("TextButton")
+local Fly = Instance.new("TextButton")
+local Tele = Instance.new("TextButton")
+
+--Properties:
+
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.fromRGB(21, 111, 255)
+Frame.BackgroundTransparency = 0.500
+Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderSizePixel = 0
+Frame.Position = UDim2.new(0.10006649, 0, 0.100746267, 0)
+Frame.Size = UDim2.new(0, 310, 0, 226)
+
+TextLabel.Parent = Frame
+TextLabel.BackgroundColor3 = Color3.fromRGB(100, 11, 255)
+TextLabel.BackgroundTransparency = 0.750
+TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.BorderSizePixel = 0
+TextLabel.Size = UDim2.new(0, 310, 0, 38)
+TextLabel.Font = Enum.Font.SourceSans
+TextLabel.Text = "Admin GUI"
+TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.TextSize = 25.000
+
+TextButton.Parent = Frame
+TextButton.BackgroundColor3 = Color3.fromRGB(33, 255, 211)
+TextButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextButton.BorderSizePixel = 0
+TextButton.Position = UDim2.new(0.0354838707, 0, 0.230088502, 0)
+TextButton.Size = UDim2.new(0, 82, 0, 48)
+TextButton.Font = Enum.Font.SourceSans
+TextButton.Text = "Grab Knife (not fe)"
+TextButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextButton.TextSize = 14.000
+
+TextButton_2.Parent = Frame
+TextButton_2.BackgroundColor3 = Color3.fromRGB(33, 255, 211)
+TextButton_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextButton_2.BorderSizePixel = 0
+TextButton_2.Position = UDim2.new(0.367741942, 0, 0.230088502, 0)
+TextButton_2.Size = UDim2.new(0, 82, 0, 48)
+TextButton_2.Font = Enum.Font.SourceSans
+TextButton_2.Text = "Parkour"
+TextButton_2.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextButton_2.TextSize = 14.000
+
+TextButton_3.Parent = Frame
+TextButton_3.BackgroundColor3 = Color3.fromRGB(33, 255, 211)
+TextButton_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextButton_3.BorderSizePixel = 0
+TextButton_3.Position = UDim2.new(0.696774185, 0, 0.230088502, 0)
+TextButton_3.Size = UDim2.new(0, 82, 0, 48)
+TextButton_3.Font = Enum.Font.SourceSans
+TextButton_3.Text = "Touch Fling"
+TextButton_3.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextButton_3.TextSize = 14.000
+
+Fly.Name = "Fly"
+Fly.Parent = Frame
+Fly.BackgroundColor3 = Color3.fromRGB(33, 255, 211)
+Fly.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Fly.BorderSizePixel = 0
+Fly.Position = UDim2.new(0.0354838707, 0, 0.535398245, 0)
+Fly.Size = UDim2.new(0, 82, 0, 48)
+Fly.Font = Enum.Font.SourceSans
+Fly.Text = "Fly Script"
+Fly.TextColor3 = Color3.fromRGB(0, 0, 0)
+Fly.TextSize = 14.000
+
+Tele.Name = "Tele"
+Tele.Parent = Frame
+Tele.BackgroundColor3 = Color3.fromRGB(33, 255, 211)
+Tele.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Tele.BorderSizePixel = 0
+Tele.Position = UDim2.new(0.367741942, 0, 0.535398245, 0)
+Tele.Size = UDim2.new(0, 82, 0, 48)
+Tele.Font = Enum.Font.SourceSans
+Tele.Text = "Telekenisis Tool"
+Tele.TextColor3 = Color3.fromRGB(0, 0, 0)
+Tele.TextSize = 14.000
