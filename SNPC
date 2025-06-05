@@ -32,8 +32,9 @@ local nextJumpTime = tick() + math.random(jumpCooldownMin, jumpCooldownMax)
 local randomMessages = {
 	"Collecting CFrame data...",
 	"Is this where the coffee machine is?",
-  "Do you ever think in binary?",
-  "I remember things I was never programmed to know."
+  	"Do you ever think in binary?",
+  	"I remember things I was never programmed to know." 
+	"Hi."
 }
 
 local messagesSent = {}
