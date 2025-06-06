@@ -30,7 +30,7 @@ local nextChatTime = tick() + math.random(chatCooldownMin, chatCooldownMax)
 local nextJumpTime = tick() + math.random(jumpCooldownMin, jumpCooldownMax)
 
 local randomMessages = {
-	"Collecting CFrame data...",
+	"August 12th 2036, heat death of the universe",
 	"Is this where the coffee machine is?",
   	"Do you ever think in binary?",
   	"I remember things I was never programmed to know.",
