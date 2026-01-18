@@ -1,0 +1,119 @@
+-- Essential Services
+local UserInputService = game:GetService("UserInputService")
+local MarketplaceService = game:GetService("MarketplaceService")
+local InsertService = game:GetService("InsertService")
+
+-- 1. Create the GUI Elements
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "InsertToolGui"
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+screenGui.ResetOnSpawn = false
+
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 250, 0, 150)
+frame.Position = UDim2.new(0.5, -125, 0.5, -75)
+frame.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+frame.BorderSizePixel = 0
+frame.Active = true -- Necessary for dragging
+frame.Parent = screenGui
+
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, 0, 0, 30)
+title.Text = "Asset Inserter"
+title.TextColor3 = Color3.new(1, 1, 1)
+title.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+title.Parent = frame
+
+local idInput = Instance.new("TextBox")
+idInput.Size = UDim2.new(0.8, 0, 0, 30)
+idInput.Position = UDim2.new(0.1, 0, 0.35, 0)
+idInput.PlaceholderText = "Enter Asset ID..."
+idInput.Text = ""
+idInput.Parent = frame
+
+local insertBtn = Instance.new("TextButton")
+insertBtn.Size = UDim2.new(0.8, 0, 0, 30)
+insertBtn.Position = UDim2.new(0.1, 0, 0.65, 0)
+insertBtn.Text = "Insert Asset"
+insertBtn.BackgroundColor3 = Color3.fromRGB(0, 170, 255)
+insertBtn.TextColor3 = Color3.new(1, 1, 1)
+insertBtn.Parent = frame
+
+--- 2. Draggable Logic (Manual Implementation)
+local dragging, dragInput, dragStart, startPos
+
+local function update(input)
+	local delta = input.Position - dragStart
+	frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+end
+
+frame.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		dragging = true
+		dragStart = input.Position
+		startPos = frame.Position
+		
+		input.Changed:Connect(function()
+			if input.UserInputState == Enum.UserInputState.End then
+				dragging = false
+			end
+		end)
+	end
+end)
+
+frame.InputChanged:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseMovement then
+		dragInput = input
+	end
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+	if input == dragInput and dragging then
+		update(input)
+	end
+end)
+
+--- 3. Insertion Logic
+insertBtn.MouseButton1Click:Connect(function()
+	local assetId = tonumber(idInput.Text)
+	if not assetId then return end
+	
+	print("Processing ID: " .. assetId)
+	
+	-- Determine asset type using MarketplaceService
+	local success, info = pcall(function()
+		return MarketplaceService:GetProductInfo(assetId)
+	end)
+	
+	if success and info then
+		-- Assets are inserted into a folder for organization
+		local container = Instance.new("Model")
+		container.Name = "Inserted_" .. assetId
+		container.Parent = workspace
+		
+		-- Logic: If it's a Decal (13) or Image (1)
+		if info.AssetTypeId == 13 or info.AssetTypeId == 1 then
+			local part = Instance.new("Part")
+			part.Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position + Vector3.new(0, 5, -5)
+			part.Parent = container
+			
+			local decal = Instance.new("Decal")
+			decal.Texture = "rbxassetid://" .. assetId
+			decal.Parent = part
+			print("Inserted Decal onto Part.")
+			
+		-- Logic: If it's a Model (10)
+		else
+			local objects = game:GetObjects("rbxassetid://" .. assetId)
+			for _, obj in pairs(objects) do
+				obj.Parent = container
+				if obj:IsA("Model") then
+					obj:MoveTo(game.Players.LocalPlayer.Character.HumanoidRootPart.Position + Vector3.new(0, 5, -5))
+				end
+			end
+			print("Inserted Model.")
+		end
+	else
+		warn("Could not retrieve asset info or ID is invalid.")
+	end
+end)
